@@ -4,15 +4,44 @@ import os
 import sys
 import time
 import keyboard
+import tkinter as tk
+
 
 
 def main():
-    is_running = True
-    while is_running:
-        print("Enter Input")
-        update()
-        if not is_running:
-            break
+    # Define the dimensions of the game board
+    board_size = 8
+
+    # Create a 2D list to represent the game board
+    game_board = [[0] * board_size for _ in range(board_size)]
+
+    # Create a Tkinter window
+    window = tk.Tk()
+    window.title("Block Puzzle Game")
+
+    # Create a list to store the buttons representing the game board
+    board_buttons = []
+
+    # Create the game board GUI
+    for row in range(board_size):
+        button_row = []
+        for col in range(board_size):
+            # Create a button for each cell in the game board
+            button = tk.Button(window, text="", width=2, height=1,
+                               command=lambda r=row, c=col: on_button_click(r, c))
+            button.grid(row=row, column=col, padx=2, pady=2)
+            button_row.append(button)
+        board_buttons.append(button_row)
+
+    # Start the Tkinter event loop
+    window.mainloop()
+
+    # is_running = True
+    # while is_running:
+    #     print("Enter Input")
+    #     update()
+    #     if not is_running:
+    #         break
 
 
 # def update():
