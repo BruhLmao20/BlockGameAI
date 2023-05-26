@@ -146,8 +146,8 @@ def main():
             # Create a button for each cell in the game board
             button = tk.Button(window, text="", width=2, height=1,
                                command=lambda r=row, c=col: on_button_click_true(r, c))
-            button = tk.Button(window, text="", width=2, height=1,
-                               command=lambda r=row, c=col: on_button_click_false(r, c))
+            # button = tk.Button(window, text="", width=2, height=1,
+            #                    command=lambda r=row, c=col: on_button_click_false(r, c))
             button.grid(row=row, column=col, padx=2, pady=2)
             button_row.append(button)
         board_buttons.append(button_row)

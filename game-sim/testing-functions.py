@@ -3,11 +3,16 @@
 
 points = 0
 
+
 def is_row_full(array):
-    for row in array:
+    row_location = []
+    for row in array:  # row is == to i
         if all(element == 1 for element in row):
-            return True
-    return False
+            row_location.append(row)
+    return row_location
+
+
+# return how many rows are full and where they are positions in the 2d array
 
 
 def is_columns_full(array):
@@ -15,6 +20,9 @@ def is_columns_full(array):
         if all(element == 1 for element in columns):
             return True
     return False
+
+
+# return how many columns are full and where they are positions in the 2d array
 
 
 # FIX BUG
@@ -40,6 +48,31 @@ def clear_columns(array):
         if all(array[row][col] == 1 for row in range(rows)):
             for row in range(rows):
                 array[row][col] = 0
+
+
+def lines_completed(array):
+    is_row_full(array)  # returns all the rows that are full
+    # use the count of rows to then award to points based on amount of rows completed
+    points_awarded = 0
+    rows_completed = len(is_row_full(array))
+    return
+
+    # is_columns_full(array)
+
+
+def points_multiplier(lines):
+    points_multiplied = 0
+    if lines == 1:
+        points_multiplied = lines * 10
+    elif lines == 2:
+        points_multiplied = lines * 15
+    elif lines == 3:
+        points_multiplied = lines * 20
+    elif lines == 4:
+        points_multiplied = lines * 25
+    elif lines == 5:
+        points_multiplied = lines * 30
+    return points_multiplied
 
 # def points_awarded(array, points):
 #
