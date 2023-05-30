@@ -1,0 +1,24 @@
+
+===FILES===
+
+CURRENT:
+
+xonclick.py
+- click and unclick button
+
+testing-functions.py
+- game logic
+- points awarded
+-
+
+============
+
+old:
+
+test1.py
+- shapes corrolating to array position
+- ALOT OF commented out functions
+-
+
+
+===FOLDERS===

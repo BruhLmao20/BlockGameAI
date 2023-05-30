@@ -1,0 +1,12 @@
+points multiplyer: works
+=> then goes to any_line_checker
+- any line checker returns number of lines: TEST
+
+
+FIXED
+
+
+
+
+=> then goes to print points
+- then points awarded

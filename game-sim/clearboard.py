@@ -14,36 +14,114 @@ import time
 game_board = np.zeros((8, 8), dtype=int)
 
 total_points = 0
+is_running = True
 
 
-# XONCLICK: MAIN CLICKING FUNCTION
+# CLEARBOARD: MAIN CLICKING FUNCTION
+
+# runs the gui so that once an update is needed to change, it can be running and updated through here
+def run_GUI(array):
+    while is_running:
+        # make the GUI a function
+        # then can add update functions to that function that will allow for x's to change
+
+
+
+def check_clear_rows(board_buttons):
+    global game_board
+
+    rows_to_clear = []
+    for row in range(len(game_board)):
+        if all(cell == 1 for cell in game_board[row]):
+            rows_to_clear.append(row)
+
+    for row in rows_to_clear:
+        for col in range(len(game_board[row])):
+            button = board_buttons[row][col]
+            button.config(text="")
+            game_board[row][col] = 0
+
+
+def check_clear_columns(board_buttons):
+    global game_board
+
+    cols_to_clear = []
+    for col in range(len(game_board[0])):
+        if all(game_board[row][col] == 1 for row in range(len(game_board))):
+            cols_to_clear.append(col)
+
+    for col in cols_to_clear:
+        for row in range(len(game_board)):
+            button = board_buttons[row][col]
+            button.config(text="")
+            game_board[row][col] = 0
+
+
+def button_click(row, col, board_buttons):
+    toggle_button_state(row, col)
+    check_clear_rows(board_buttons)
+    check_clear_columns(board_buttons)
+
+
 def toggle_button_state(row, col):
-    global total_points  # Declare 'points' as a global variable to modify it within the function
+    global total_points, game_board, board_buttons
+
     button = board_buttons[row][col]
     current_state = button.cget("text")
+
+    # MAYBE RUN A WHILE LOOP AND IF THE BUTTON IS FULLL THEN IT CAN JUMP TO FULL THEN CAN CLEAR AFTER THAT
     if current_state == "":
         button.config(text="X")
         game_board[row][col] = 1
-        # total_points += 1  # add this points system to the testing_functions system
-        # total_points += 1 + testing_functions.total_points_system(game_board)
         testing_functions.total_logic(game_board)
         print_board(game_board)
-        # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
-        # extra_space()
-        # print_2d_array(game_board)
     else:
-        button.config(text="")  # use this on a function to clear the board
+        button.config(text="")
         game_board[row][col] = 0
         print_board(game_board)
-        # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
-        # print_board(game_board) combines the functions below into 1
-        # - extra_space()
-        # - print_2d_array(game_board)
+
+    check_clear_rows(board_buttons)
+    check_clear_columns(board_buttons)
+
+
+# def check_clear_rows():
+#     global game_board, board_buttons
+#
+#     rows_to_clear = []
+#     for row in range(len(game_board)):
+#         if all(cell == 1 for cell in game_board[row]):
+#             rows_to_clear.append(row)
+#
+#     for row in rows_to_clear:
+#         for col in range(len(game_board[row])):
+#             button = board_buttons[row][col]
+#             button.config(text="")
+#             game_board[row][col] = 0
+#
+#
+# def check_clear_columns():
+#     global game_board, board_buttons
+#
+#     cols_to_clear = []
+#     for col in range(len(game_board[0])):
+#         if all(game_board[row][col] == 1 for row in range(len(game_board))):
+#             cols_to_clear.append(col)
+#
+#     for col in cols_to_clear:
+#         for row in range(len(game_board)):
+#             button = board_buttons[row][col]
+#             button.config(text="")
+#             game_board[row][col] = 0
+#
+#
+# def button_click(row, col):
+#     toggle_button_state(row, col)
+#     check_clear_rows()
+#     check_clear_columns()
 
 
 # clear x's on buttons
 # def reset_button(button):
-#
 
 
 # Text and Help Function ====================
@@ -116,12 +194,13 @@ def main():
     board_buttons = []
 
     # Create the game board GUI
+    # NEED TO CREATE AN UPDATE FUNCTION THAT UPDATES THIS
     for row in range(board_size):
         button_row = []
         for col in range(board_size):
             # Create a button for each cell in the game board
             button = tk.Button(window, text="", width=2, height=1,
-                               command=lambda r=row, c=col: toggle_button_state(r, c))
+                               command=lambda r=row, c=col: button_click(r, c, board_buttons))
             button.grid(row=row, column=col, padx=2, pady=2)
             button_row.append(button)
         board_buttons.append(button_row)
@@ -129,6 +208,11 @@ def main():
     # Create a frame to hold the shape buttons
     shape_frame = tk.Frame(window)
     shape_frame.grid(row=board_size, column=0, columnspan=board_size)
+
+    # print(board_buttons)
+    # print(button_row)
+    print_2d_array(board_buttons)
+    # print_2d_array(button_row)
 
     window.mainloop()
 

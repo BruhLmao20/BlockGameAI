@@ -1,0 +1,10 @@
+
+
+first check if there even is any line that is complete
+FUCNTIONS:
+-
+
+using boolean to just check if its even true
+once found true, seach for how many lines are completed
+once lines found out, then return their locaiton on the array
+award points, then clear the lines

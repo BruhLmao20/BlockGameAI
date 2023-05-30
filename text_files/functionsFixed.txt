@@ -1,0 +1,5 @@
+
+is_columns_full(array)
+- function would output row location
+- RIGHTFULLY OUTPUTS COL LOCATION
+
