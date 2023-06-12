@@ -43,6 +43,7 @@ def total_logic(button, array):
     clear_lines(array)
     reset_button(button, game_board)
 
+
 def clear_lines(array):
     clear_row(array)
     clear_columns(array)
@@ -273,3 +274,44 @@ def main():
 if __name__ == "__main__":
     # print(game_board)
     main()
+
+
+
+# global total_points
+# total_points = 0
+#
+# def print_points(array):
+#     current_points = 1
+#     current_points += points_multiplier(any_line_checker(array))
+#
+#     print('Points: ' + str(current_points))
+#
+#
+# def points_awarded(array, total_points):
+#     total_points += points_multiplier(any_line_checker(array))
+#     return total_points
+#
+#
+# def total_points_system(array):  # ran in the clear function
+#     if row_full_boolean(array) or columns_full_boolean(array):
+#         all_points = points_awarded(array, total_points)
+#         print_points(array)
+#         return all_points
+#     else:
+#         total_points += 1
+#         return total_points
+#
+#
+# def points_multiplier(lines):  # number of lines INT, take in anylinechecker
+#     points_multiplied = 0
+#     if lines == 1:
+#         points_multiplied += lines * 10
+#     elif lines == 2:
+#         points_multiplied += lines * 15
+#     elif lines == 3:
+#         points_multiplied += lines * 20
+#     elif lines == 4:
+#         points_multiplied += lines * 25
+#     elif lines == 5:
+#         points_multiplied += lines * 30
+#     return points_multiplied
