@@ -1,4 +1,13 @@
 # import testing_functions
+# from helpers import S
+# S.my_function()
+# S.print_2d_array(array)
+
+# ALL FUNCTIONS
+# print_2d_array(array)
+# print_space()
+# extra_space()
+# print_board(game_board)
 
 
 # Text and Help Function ====================
