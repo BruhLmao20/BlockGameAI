@@ -226,7 +226,10 @@ def points_multiplier(lines):  # number of lines INT, take in anylinechecker
         points_multiplied += lines * 25
     elif lines == 5:
         points_multiplied += lines * 30
+    elif lines == 6:
+        points_multiplied += lines * 35
     return points_multiplied
+# max amount of lines that can be destroyed is 6 lines destroyed at once
 
 
 # ===== 4 =====
@@ -285,12 +288,22 @@ def print_2d_array(array):
         print()
 
 
-def format_output(columns):
-    if not columns:
+def format_r_output(lines):
+    if not lines:
+        return "No rows are full."
+    else:
+        line_indices = ', '.join(str(line) for line in lines)
+        return f"Row(s): {line_indices} are full."
+
+
+def format_c_output(lines):
+    if not lines:
         return "No columns are full."
     else:
-        column_indices = ', '.join(str(col) for col in columns)
-        return f"Column(s): {column_indices} are full."
+        line_indices = ', '.join(str(line) for line in lines)
+        return f"Column(s): {line_indices} are full."
+    # NEED TO MAKE COL AND ROW SPECIFIC OUTPUT
+    # IF rows or cols are connected make out put (row or col's: 1-5 or #-# are full)
 
 
 def initial_fill(array):
@@ -301,9 +314,12 @@ def initial_fill(array):
 
 
 def test_start(array):
-    print_2d_array(array)
-    print(is_row_full(array))
-    print(is_columns_full(array))
+    # UNCOMMENT THESE LINES
+    # print_2d_array(array)
+    # print(is_row_full(array))
+    # print(is_columns_full(array))
+    print(format_r_output(is_row_full(array)))
+    print(format_c_output(is_columns_full(array)))
 
 
 def empty_array():
@@ -345,8 +361,8 @@ def create_array_custom(row, col):
 
 def fill_array_with_ones(current_array):
     # Get the number of rows and columns to fill from the user
-    rows = int(input("Enter the number of rows to fill with 1's: "))
-    cols = int(input("Enter the number of columns to fill with 1's: "))
+    rows = int(input("Enter the number [1-6] of rows to fill with 1's: "))
+    cols = int(input("Enter the number [1-6] of columns to fill with 1's: "))
 
     # Fill the specified rows with 1's
     for row in range(rows):
@@ -371,11 +387,12 @@ def main():
     print_2d_array(test_array)
     fill_array_with_ones(test_array)  # 1, 1 get 30 points
     print_2d_array(test_array)
+    test_start(test_array)
     # quick_points(test_array)
     total_points_system(test_array)
     points(test_array)
 
-    test_start(test_array)
+    # test_start(test_array)
 
     # initial_fill(array1)
     # total_points_system(array1)
@@ -385,3 +402,10 @@ def main():
 if __name__ == "__main__":
     main()
 
+# CLEAR the lines that are full
+# then return the array back to the array
+
+# is print_points being used or even built properly?
+
+
+# CREATE A RUN AGAIN FUNCTION
