@@ -74,13 +74,14 @@ def lines(array):
     return all_lines
 
 
-def is_row_full(array):
-    full_row_indices = []
-    for row_index, row in enumerate(array):
-        if all(element == 1 for element in row) and len(row) == row.count(1):
-            full_row_indices.append(row_index + 1)  # Add the row index (+1 to make it 1-based)
-
-    return full_row_indices
+# CORRECT BUT RE-LOCATED TO LOGIC
+# def is_row_full(array):
+#     full_row_indices = []
+#     for row_index, row in enumerate(array):
+#         if all(element == 1 for element in row) and len(row) == row.count(1):
+#             full_row_indices.append(row_index + 1)  # Add the row index (+1 to make it 1-based)
+#
+#     return full_row_indices
 
 
 # def is_columns_full(array):
@@ -101,15 +102,16 @@ def format_output(columns):
         return f"Column(s): {column_indices} are full."
 
 
-def is_columns_full(array):
-    full_col_indices = []
-    num_cols = len(array[0])  # Number of columns in the array
-    for col_index in range(num_cols):
-        col = [row[col_index] for row in array]  # Get the column elements
-        if all(element == 1 for element in col) and len(col) == col.count(1):
-            full_col_indices.append(col_index + 1)  # Add the column index (+1 to make it 1-based)
-
-    return full_col_indices
+# CORRECT BUT RE-LOCATED TO LOGIC
+# def is_columns_full(array):
+#     full_col_indices = []
+#     num_cols = len(array[0])  # Number of columns in the array
+#     for col_index in range(num_cols):
+#         col = [row[col_index] for row in array]  # Get the column elements
+#         if all(element == 1 for element in col) and len(col) == col.count(1):
+#             full_col_indices.append(col_index + 1)  # Add the column index (+1 to make it 1-based)
+#
+#     return full_col_indices
 
 
 # get lines from IS FULL COL AND ROW PUT INTO ONE
@@ -203,6 +205,7 @@ def total_points_system(array):
 
     if is_row_full(array) or is_columns_full(array):
         points_awarded(array)
+        # empty_array(array) # ADD AFTER TPS
 
 
 # ===== 2 =====
@@ -229,6 +232,8 @@ def points_multiplier(lines):  # number of lines INT, take in anylinechecker
     elif lines == 6:
         points_multiplied += lines * 35
     return points_multiplied
+
+
 # max amount of lines that can be destroyed is 6 lines destroyed at once
 
 
@@ -277,6 +282,40 @@ def is_columns_full(array):
             full_col_indices.append(col_index + 1)  # Add the column index (+1 to make it 1-based)
 
     return full_col_indices
+
+
+# def clear_lines(array):
+#     full_col_indices = []
+#     num_cols = len(array[0])  # Number of columns in the array
+#     for col_index in range(num_cols):
+#         col = [row[col_index] for row in array]  # Get the column elements
+#         if all(element == 1 for element in col) and len(col) == col.count(1):
+#             full_col_indices.append(col_index + 1)  # Add the column index (+1 to make it 1-based)
+
+def clear_rows(array):
+    full_row_indices = []
+    num_rows = len(array)  # Number of rows in the array
+    for row_index in range(num_rows):
+        row = array[row_index]  # Get the row elements
+        if all(element == 1 for element in row) and len(row) == row.count(1):
+            full_row_indices.append(row_index)
+
+    for row_index in full_row_indices:
+        array[row_index] = [0] * len(array[row_index])  # Replace the full row with zeros
+
+    return array
+
+
+def clear_columns(array):
+    full_col_indices = is_columns_full(array)  # Get the indices of full columns
+    num_rows = len(array)  # Number of rows in the array
+    for row_index in range(num_rows):
+        for col_index in full_col_indices:
+            array[row_index][col_index - 1] = 0  # Replace the element in the full column with zero
+
+    return array
+
+# https://chat.openai.com/share/1ff9549a-e83c-430a-979b-9f311e2e0742
 
 
 # ===== ===== INITIALIZE ===== =====
@@ -379,11 +418,11 @@ def fill_array_with_ones(current_array):
 
 def quick_points(array):
     total_points_system(array)
+    empty_array(array)  # NEW ADDED
     points(array)
 
 
-def main():
-    test_array = empty_array()
+def practice(test_array):
     print_2d_array(test_array)
     fill_array_with_ones(test_array)  # 1, 1 get 30 points
     print_2d_array(test_array)
@@ -391,6 +430,24 @@ def main():
     # quick_points(test_array)
     total_points_system(test_array)
     points(test_array)
+
+    # print_2d_array(test_array)
+    # fill_array_with_ones(test_array)  # 1, 1 get 30 points
+    # print_2d_array(test_array)
+    # test_start(test_array)
+    # # quick_points(test_array)
+    # total_points_system(test_array)
+    # points(test_array)
+
+
+# def
+
+
+def main():
+    test_array = empty_array()
+    practice(test_array)
+    # need to clear the 1's that were used in previous line
+    practice(test_array)
 
     # test_start(test_array)
 
@@ -409,3 +466,44 @@ if __name__ == "__main__":
 
 
 # CREATE A RUN AGAIN FUNCTION
+
+
+# https://github.com/BruhLmao20/EverythingApp-EA/blob/main/EA%20v.05.5%20Jan-17-23/Everything%20App/helpers/program_option_menu.java
+# https://github.com/BruhLmao20/EverythingApp-EA/blob/main/EA%20v.05.5%20Jan-17-23/Everything%20App/everythingApp.java
+#  def run(): TURN THIS JAVA CODE INTO PYTHON
+#
+#     public boolean is_running;
+#
+#     // menu options
+#     public String[] menu_items;
+#     public String[] fibMenu_items; // NOTE: DONT NEED SPECIAL AS MENU ITEMS WILL BE FILLED IN NEW
+#
+#     protected String next;
+#
+#     public void run() throws IOException{
+#         while(is_running){
+#             update();
+#         }
+#     }
+#
+#     public void update() throws IOException{
+#         menu_show();
+#         menu_user_input();
+#     }
+
+    # public void menu_user_input() throws IOException{
+    #
+    #     // gets user input
+    #     Scanner user_input = new Scanner(System.in);
+    #     next  = user_input.next();
+    #
+    #     //exit program if user writes exit
+    #     if(next.equals("exit")){
+    #         //S.o("Program Ended");     // doesnt need to show in nested options, as ending isnt ending full program
+    #         endp();
+    #     }
+    # }
+    #
+    # public void endp(){
+    #     is_running = false;
+    # }
