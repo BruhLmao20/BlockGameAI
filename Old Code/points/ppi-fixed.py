@@ -1,5 +1,3 @@
-from helpers import S
-
 rowt = True
 rowf = False
 colt = True
