@@ -9,6 +9,7 @@ import testing_functions
 from helpers import *
 import os
 import time
+from how_to_play import show_instructions
 
 # Step 1: Define the game board
 game_board = np.zeros((8, 8), dtype=int)
@@ -27,14 +28,14 @@ def toggle_button_state(row, col):
         # total_points += 1  # add this points system to the testing_functions system
         # total_points += 1 + testing_functions.total_points_system(game_board)
         testing_functions.total_logic(game_board)
-        print_board(game_board)
+        # print_board(game_board)
         # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
         # extra_space()
         # print_2d_array(game_board)
     else:
         button.config(text="")  # use this on a function to clear the board
         game_board[row][col] = 0
-        print_board(game_board)
+        # print_board(game_board)
         # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
         # print_board(game_board) combines the functions below into 1
         # - extra_space()
@@ -102,6 +103,9 @@ def main():
 
     # Define the dimensions of the game board
     board_size = 8
+
+    # Display instructions on how to play
+    show_instructions()
 
     # print(game_board)
 
