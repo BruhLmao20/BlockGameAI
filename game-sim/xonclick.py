@@ -6,9 +6,6 @@
 import numpy as np
 import tkinter as tk
 import testing_functions
-from helpers import *
-import os
-import time
 
 # Step 1: Define the game board
 game_board = np.zeros((8, 8), dtype=int)
