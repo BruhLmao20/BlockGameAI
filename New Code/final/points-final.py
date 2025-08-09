@@ -1,26 +1,6 @@
 # PRE COMMENT ERASED FILE IS ON FILE "OLD CODE\POINTS\ppi.fixed.py
 import keyboard
 
-# rowt = True
-# rowf = False
-# colt = True
-# colf = False
-#
-# # array1 = []
-#
-# rows = 8
-# cols = 8
-#
-# # Create a 2D array with all elements initialized to 0  ## WHAT DOES THIS MEAN? AND WHY COL FIRST?
-# array1 = [[0] * cols for _ in range(rows)]
-#
-# # Fill the bottom row with 1
-# array1[rows - 1] = [1] * cols
-#
-# # Fill the right column with 1
-# for i in range(rows):
-#     array1[i][cols - 1] = 1
-
 total_points = 0  # Initialize the total points variable
 
 
@@ -305,3 +285,24 @@ if __name__ == "__main__":
 #     key = cv2.waitKey(1)
 #     if key == 27:
 #         break
+
+# TOP OF CODE 
+# rowt = True
+# rowf = False
+# colt = True
+# colf = False
+#
+# # array1 = []
+#
+# rows = 8
+# cols = 8
+#
+# # Create a 2D array with all elements initialized to 0  ## WHAT DOES THIS MEAN? AND WHY COL FIRST?
+# array1 = [[0] * cols for _ in range(rows)]
+#
+# # Fill the bottom row with 1
+# array1[rows - 1] = [1] * cols
+#
+# # Fill the right column with 1
+# for i in range(rows):
+#     array1[i][cols - 1] = 1
