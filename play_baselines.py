@@ -36,7 +36,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--agent", choices=["random", "greedy"], default="random")
     parser.add_argument("--size", type=int, default=8, help="board size")
-    parser.add_argument("--max-steps", type=int, default=1000, help="maximum steps per game")
+    parser.add_argument("--max-steps", type=int, default=8500, help="maximum steps per game") #default=10000
     args = parser.parse_args()
     run_game(args.agent, args.size, args.max_steps)
 
