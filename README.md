@@ -1,6 +1,6 @@
 # BlockGameAI
 
-BlockGameAI is a collection of tools for experimenting with a grid-based block puzzle game. It bundles a basic simulator, GUI demos, and reinforcement learning experiments.
+#BlockGameAI is a collection of tools for experimenting with a grid-based block puzzle game. It bundles a basic simulator, GUI demos, and reinforcement learning experiments.
 
 ## Project overview
 - `game-sim/` – early simulation utilities for board mechanics.
@@ -36,3 +36,18 @@ Trained models are saved to `models/q_table.pkl`.
 
 ## Experiments and research notes
 Further exploration scripts live in [`ChatGPT Codex/`](ChatGPT%20Codex/) and text notes in [`text_files/`](text_files/). These directories can be used as starting points for custom experiments or research notebooks.
+=======
+This project provides AI agents and tools for playing and analyzing block-based puzzles.
+
+## Installation
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+Refer to the source code and scripts within the repository for examples on running simulations and experiments.
+# main
