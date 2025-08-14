@@ -3,15 +3,15 @@
 import argparse
 import time
 
-from agents import RandomAgent, GreedyAgent
-from block_env import BlockGame
+from agents import GreedyAgent, RandomAgent
+from env.block_puzzle import BlockPuzzleEnv
 from play_reasoning import ReasoningGreedyAgent, print_board
 
 
 def run_game(
     agent_name: str, size: int, max_steps: int, delay: float = 0.3
 ) -> None:
-    env = BlockGame(size=size)
+    env = BlockPuzzleEnv(size=size)
     board = env.reset()
 
     if agent_name == "greedy":

@@ -1,12 +1,13 @@
-from block_env import BlockGame
-from typing import Tuple, List
+from typing import List, Tuple
+
+from env.block_puzzle import BlockPuzzleEnv
 
 
 class ReasoningGreedyAgent:
     """Heuristic agent that also reports its reasoning."""
 
     def select_action_with_reason(
-        self, env: BlockGame
+        self, env: BlockPuzzleEnv
     ) -> Tuple[Tuple[int, int], str]:
         best_action, best_score, best_reason = None, None, ""
         for action in env.valid_actions():
@@ -34,7 +35,7 @@ def print_board(board: List[List[int]]) -> None:
     print()
 
 
-def run_episode(size: int = 8, max_steps: int = 1000): #int = 100
+def run_episode(size: int = 8, max_steps: int = 1000):  # int = 100
     """Play one episode using the reasoning agent.
 
     The original implementation would continue forever because clearing a
@@ -43,7 +44,7 @@ def run_episode(size: int = 8, max_steps: int = 1000): #int = 100
     steps with ``max_steps``.
     """
 
-    env = BlockGame(size=size)
+    env = BlockPuzzleEnv(size=size)
     agent = ReasoningGreedyAgent()
 
     board = env.reset()

@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from block_puzzle_env import BlockPuzzleEnv
+from env.block_puzzle import BlockPuzzleEnv
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "q_table.pkl")
 

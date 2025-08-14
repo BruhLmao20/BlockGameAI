@@ -1,12 +1,13 @@
 import random
 from typing import Tuple
-from block_env import BlockGame
+
+from env.block_puzzle import BlockPuzzleEnv
 
 
 class RandomAgent:
     """Agent that selects actions uniformly at random."""
 
-    def select_action(self, env: BlockGame) -> Tuple[int, int]:
+    def select_action(self, env: BlockPuzzleEnv) -> Tuple[int, int]:
         actions = env.valid_actions()
         return random.choice(actions)
 
@@ -14,7 +15,7 @@ class RandomAgent:
 class GreedyAgent:
     """Agent that evaluates actions with simple heuristics."""
 
-    def select_action(self, env: BlockGame) -> Tuple[int, int]:
+    def select_action(self, env: BlockPuzzleEnv) -> Tuple[int, int]:
         best_score = None
         best_action = None
         for action in env.valid_actions():
@@ -25,7 +26,7 @@ class GreedyAgent:
         # Fallback in case no action evaluated (e.g., board full)
         return best_action if best_action is not None else random.choice(env.valid_actions())
 
-    def _evaluate(self, env: BlockGame, action: Tuple[int, int]) -> float:
+    def _evaluate(self, env: BlockPuzzleEnv, action: Tuple[int, int]) -> float:
         # Simulate placing the block
         board_copy = [row[:] for row in env.board]
         r, c = action
