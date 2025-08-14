@@ -1,4 +1,12 @@
+#<<<<<<< codex/add-q-learning-to-agent-l15ip9
 """Run baseline or reasoning agents against the block puzzle environment."""
+#=======
+"""Run baseline agents against the block puzzle environment.
+
+Example:
+    python play_baselines.py --agent greedy --size 8 --max-steps 5000
+"""
+#>>>>>>> main
 import argparse
 import time
 from typing import Tuple, List, Optional
@@ -7,6 +15,7 @@ from agents import RandomAgent, GreedyAgent
 from block_env import BlockGame
 
 
+#<<<<<<< codex/add-q-learning-to-agent-l15ip9
 class ReasoningGreedyAgent:
     """Greedy agent that explains its heuristic decisions."""
 
@@ -45,6 +54,9 @@ def print_board(board: List[List[int]], highlight: Optional[Tuple[int, int]] = N
 def run_game(
     agent_name: str, size: int, max_steps: int = 1000, delay: float = 0.3
 ) -> None:
+#=======
+def run_game(agent_name: str, size: int, max_steps: int) -> None:
+#>>>>>>> main
     env = BlockGame(size=size)
     board = env.reset()
 
@@ -89,6 +101,7 @@ def main() -> None:
         "--agent", choices=["random", "greedy", "reasoning"], default="random"
     )
     parser.add_argument("--size", type=int, default=8, help="board size")
+#<<<<<<< codex/add-q-learning-to-agent-l15ip9
     parser.add_argument(
         "--delay",
         type=float,
@@ -97,6 +110,11 @@ def main() -> None:
     )
     args = parser.parse_args()
     run_game(args.agent, args.size, delay=args.delay)
+#=======
+    parser.add_argument("--max-steps", type=int, default=1000, help="maximum steps per game")
+    args = parser.parse_args()
+    run_game(args.agent, args.size, args.max_steps)
+#>>>>>>> main
 
 
 if __name__ == "__main__":
