@@ -34,7 +34,15 @@ def print_board(board: List[List[int]]) -> None:
     print()
 
 
-def run_episode(size: int = 8):
+def run_episode(size: int = 8, max_steps: int = 100):
+    """Play one episode using the reasoning agent.
+
+    The original implementation would continue forever because clearing a
+    complete row or column makes new actions available again. To keep example
+    runs short and avoid the need to interrupt manually, we cap the number of
+    steps with ``max_steps``.
+    """
+
     env = BlockGame(size=size)
     agent = ReasoningGreedyAgent()
 
@@ -43,14 +51,17 @@ def run_episode(size: int = 8):
     print_board(board)
 
     done, step = False, 0
-    while not done:
+    while not done and step < max_steps:
         action, reason = agent.select_action_with_reason(env)
         print(f"Step {step}: placing at {action} because {reason}")
         board, reward, done = env.step(action)
         print_board(board)
         step += 1
 
-    print("Game over – no legal moves remain.")
+    if done:
+        print("Game over – no legal moves remain.")
+    else:
+        print(f"Reached step limit of {max_steps}; stopping.")
 
 
 if __name__ == "__main__":
