@@ -6,7 +6,7 @@
 import numpy as np
 import tkinter as tk
 import testing_functions
-from helpers import *
+from helpers import extra_space, print_2d_array, print_board
 import os
 import time
 
@@ -27,6 +27,7 @@ def toggle_button_state(row, col):
         # total_points += 1  # add this points system to the testing_functions system
         # total_points += 1 + testing_functions.total_points_system(game_board)
         testing_functions.total_logic(game_board)
+        testing_functions.print_points(game_board)
         print_board(game_board)
         # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
         # extra_space()
@@ -34,40 +35,13 @@ def toggle_button_state(row, col):
     else:
         button.config(text="")  # use this on a function to clear the board
         game_board[row][col] = 0
+        testing_functions.print_points(game_board)
         print_board(game_board)
         # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
         # print_board(game_board) combines the functions below into 1
         # - extra_space()
         # - print_2d_array(game_board)
 
-
-# clear x's on buttons
-# def reset_button(button):
-#
-
-
-# Text and Help Function ====================
-def print_2d_array(array):
-    for row in array:
-        for element in row:
-            print(element, end=' ')
-        print()
-
-
-def print_space():
-    print("=" * 20)  # Repeat "=" 20 times
-
-
-def extra_space():
-    print_space()
-    print_space()
-    print_space()
-
-
-def print_board(game_board):
-    extra_space()
-    testing_functions.print_points(game_board)
-    print_2d_array(game_board)
 
 
 # Game Physics Functions ====================
