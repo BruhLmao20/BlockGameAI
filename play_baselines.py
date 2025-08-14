@@ -2,11 +2,19 @@
 import argparse
 import time
 import random
+=======
+"""Run baseline or reasoning agents against the block puzzle environment."""
+"""Run baseline agents against the block puzzle environment.
+
+Example:
+    python play_baselines.py --agent greedy --size 8 --max-steps 5000
+"""
+import argparse
+import time
 from typing import Tuple, List, Optional
 
 from agents import RandomAgent, GreedyAgent
 from block_env import BlockGame
-
 
 class ReasoningGreedyAgent:
     """Greedy agent that explains its heuristic decisions."""
@@ -16,6 +24,7 @@ class ReasoningGreedyAgent:
     ) -> Tuple[Tuple[int, int], str]:
         best_score: Optional[int] = None
         best_candidates: List[Tuple[Tuple[int, int], str]] = []
+        best_action, best_score, best_reason = None, None, ""
         for action in env.valid_actions():
             board_copy = [row[:] for row in env.board]
             r, c = action
@@ -41,6 +50,17 @@ def print_board(board: List[List[int]], highlight: Optional[Tuple[int, int]] = N
         for c, cell in enumerate(row):
             if highlight == (r, c):
                 rendered.append(f"\033[93m[{cell}]\033[0m")
+                best_action, best_score, best_reason = action, score, reason
+        return best_action, best_reason
+
+
+def print_board(board: List[List[int]], highlight: Optional[Tuple[int, int]] = None) -> None:
+    """Print the board, highlighting the last move in yellow."""
+    for r, row in enumerate(board):
+        rendered = []
+        for c, cell in enumerate(row):
+            if highlight == (r, c):
+                rendered.append(f"\033[93m{cell}\033[0m")
             else:
                 rendered.append(str(cell))
         print(" ".join(rendered))
@@ -54,7 +74,11 @@ def run_game(
     board = env.reset()
     if max_steps is None:
         max_steps = size * size
-
+    agent_name: str, size: int, max_steps: int = 1000, delay: float = 0.3
+) -> None:
+def run_game(agent_name: str, size: int, max_steps: int) -> None:
+    env = BlockGame(size=size)
+    board = env.reset()
     if agent_name == "greedy":
         agent = GreedyAgent()
         reasoning = False
@@ -104,6 +128,12 @@ def main() -> None:
     )
     args = parser.parse_args()
     run_game(args.agent, args.size, delay=args.delay)
+=======
+    args = parser.parse_args()
+    run_game(args.agent, args.size, delay=args.delay)
+    parser.add_argument("--max-steps", type=int, default=1000, help="maximum steps per game")
+    args = parser.parse_args()
+    run_game(args.agent, args.size, args.max_steps)
 
 
 if __name__ == "__main__":
