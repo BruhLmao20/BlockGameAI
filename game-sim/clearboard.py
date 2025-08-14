@@ -6,7 +6,7 @@
 import numpy as np
 import tkinter as tk
 import testing_functions
-from helpers import *
+from helpers import extra_space, print_2d_array, print_board
 import os
 import time
 
@@ -25,7 +25,7 @@ def run_GUI(array):
         # make the GUI a function
         # then can add update functions to that function that will allow for x's to change
 
-
+        pass
 
 def check_clear_rows(board_buttons):
     global game_board
@@ -74,10 +74,12 @@ def toggle_button_state(row, col):
         button.config(text="X")
         game_board[row][col] = 1
         testing_functions.total_logic(game_board)
+        testing_functions.print_points(game_board)
         print_board(game_board)
     else:
         button.config(text="")
         game_board[row][col] = 0
+        testing_functions.print_points(game_board)
         print_board(game_board)
 
     check_clear_rows(board_buttons)
@@ -118,35 +120,6 @@ def toggle_button_state(row, col):
 #     toggle_button_state(row, col)
 #     check_clear_rows()
 #     check_clear_columns()
-
-
-# clear x's on buttons
-# def reset_button(button):
-
-
-# Text and Help Function ====================
-def print_2d_array(array):
-    for row in array:
-        for element in row:
-            print(element, end=' ')
-        print()
-
-
-def print_space():
-    print("=" * 20)  # Repeat "=" 20 times
-
-
-def extra_space():
-    print_space()
-    print_space()
-    print_space()
-
-
-def print_board(game_board):
-    extra_space()
-    testing_functions.print_points(game_board)
-    print_2d_array(game_board)
-
 
 # Game Physics Functions ====================
 def on_button_click_true(row, col):

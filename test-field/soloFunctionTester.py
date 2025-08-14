@@ -1,4 +1,4 @@
-from helpers.S import *
+from helpers import print_2d_array
 
 
 def points_multiplier(lines):  # number of lines INT, take in anylinechecker
