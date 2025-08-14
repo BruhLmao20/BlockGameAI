@@ -34,7 +34,7 @@ def print_board(board: List[List[int]]) -> None:
     print()
 
 
-def run_episode(size: int = 8, max_steps: int = 100):
+def run_episode(size: int = 8, max_steps: int = 1000): #int = 100
     """Play one episode using the reasoning agent.
 
     The original implementation would continue forever because clearing a

@@ -86,7 +86,6 @@ class BlockPuzzleEnv:
     def reset(self) -> None:
         """Reset the board to all zeros."""
         self.board.fill(0)
-=======
 import random
 from typing import List, Tuple, Dict, Any
 

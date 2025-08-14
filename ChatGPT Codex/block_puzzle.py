@@ -243,7 +243,7 @@ class Game:
         self.mid_font = pygame.font.SysFont("segoeui,arial", 32)
 
         # High score
-        self.high_score_path = "highscore.txt"
+        self.high_score_path = "../highscore.txt"
         self.high_score = self.load_high_score()
 
         # Animation time
