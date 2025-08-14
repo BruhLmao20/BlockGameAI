@@ -7,12 +7,14 @@ import numpy as np
 import tkinter as tk
 import testing_functions
 from helpers import *
+
 import os
 import time
 
 # Step 1: Define the game board
 game_board = np.zeros((8, 8), dtype=int)
 
+# running score for the current game
 total_points = 0
 
 
@@ -24,21 +26,18 @@ def toggle_button_state(row, col):
     if current_state == "":
         button.config(text="X")
         game_board[row][col] = 1
-        # total_points += 1  # add this points system to the testing_functions system
-        # total_points += 1 + testing_functions.total_points_system(game_board)
-        testing_functions.total_logic(game_board)
-        print_board(game_board)
-        # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
-        # extra_space()
-        # print_2d_array(game_board)
     else:
         button.config(text="")  # use this on a function to clear the board
         game_board[row][col] = 0
-        print_board(game_board)
-        # CLEAR COMMENTS IN NEXT COMMIT 5-26-23
-        # print_board(game_board) combines the functions below into 1
-        # - extra_space()
-        # - print_2d_array(game_board)
+
+    # Run the game logic: clear completed lines and compute points earned
+    points_earned = testing_functions.total_logic(game_board)
+    total_points += points_earned
+
+    # Update GUI elements
+    sync_board_buttons()
+    score_label.config(text=f"Score: {total_points}")
+    print_board(game_board)
 
 
 # clear x's on buttons
@@ -70,6 +69,14 @@ def print_board(game_board):
     print_2d_array(game_board)
 
 
+def sync_board_buttons():
+    """Update the GUI buttons to match the current ``game_board`` state."""
+    for r in range(len(game_board)):
+        for c in range(len(game_board[0])):
+            text = "X" if game_board[r][c] == 1 else ""
+            board_buttons[r][c].config(text=text)
+
+
 # Game Physics Functions ====================
 def on_button_click_true(row, col):
     # Update the game board and button text when a button is clicked
@@ -98,7 +105,7 @@ def on_button_click_false(row, col):
 # - game_board:
 
 def main():
-    global game_board, board_buttons
+    global game_board, board_buttons, score_label
 
     # Define the dimensions of the game board
     board_size = 8
@@ -125,6 +132,10 @@ def main():
             button.grid(row=row, column=col, padx=2, pady=2)
             button_row.append(button)
         board_buttons.append(button_row)
+
+    # Score display
+    score_label = tk.Label(window, text=f"Score: {total_points}")
+    score_label.grid(row=0, column=board_size, padx=10, pady=5, sticky="w")
 
     # Create a frame to hold the shape buttons
     shape_frame = tk.Frame(window)
