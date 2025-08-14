@@ -1,10 +1,14 @@
-"""Run baseline agents against the block puzzle environment."""
+"""Run baseline agents against the block puzzle environment.
+
+Example:
+    python play_baselines.py --agent greedy --size 8 --max-steps 5000
+"""
 import argparse
 from agents import RandomAgent, GreedyAgent
 from block_env import BlockGame
 
 
-def run_game(agent_name: str, size: int, max_steps: int = 1000) -> None:
+def run_game(agent_name: str, size: int, max_steps: int) -> None:
     env = BlockGame(size=size)
     env.reset()
     if agent_name == "greedy":
@@ -32,8 +36,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--agent", choices=["random", "greedy"], default="random")
     parser.add_argument("--size", type=int, default=8, help="board size")
+    parser.add_argument("--max-steps", type=int, default=1000, help="maximum steps per game")
     args = parser.parse_args()
-    run_game(args.agent, args.size)
+    run_game(args.agent, args.size, args.max_steps)
 
 
 if __name__ == "__main__":
